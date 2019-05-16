@@ -2,10 +2,16 @@ void handleKey() {
   isEncoderButtonPressed = true;
 }
 
-long encoderValueRead() {
-  long encoderNewPosition = myEnc.read();
+double encoderValueRead() {
+  double encoderNewPosition = myEnc.read();
   if (encoderNewPosition != encoderOldPosition) {
     encoderOldPosition = encoderNewPosition;
+  }
+  if (encoderOldPosition >= 360) {
+    myEnc.write(encoderOldPosition - 360);
+  }
+  if (encoderOldPosition <= 0) {
+    myEnc.write(encoderOldPosition + 360);
   }
   return encoderNewPosition;
 }
@@ -14,9 +20,7 @@ boolean encoderButtonPressed() {
   if (isEncoderButtonPressed && (millis() - lastUpdateEncoderMillis > 50)) {
     isEncoderButtonPressed = false;
     lastUpdateEncoderMillis = millis();
-    // Reset the counter
-    myEnc.write(0);
-//    Serial.println("Botão pressionado e soltado");
+    Serial.println("Botão pressionado e soltado");
     return true;
   } else {
     return false;

@@ -6,8 +6,16 @@ long encoderNewPosition;
 boolean isEncoderButtonPressed = false;
 long lastUpdateEncoderMillis = 0;
 
-//
-#define ledR D6;
-#define ledG D7;
-#define ledB D8;
-int ledHueValue = 0;
+//Led
+#define ledR D7
+#define ledG D8
+#define ledB D6
+#define hueFactor 1023 //esse valor é a multiplicação do valor da matiz, que retorna de 0 a 1.
+#define brightnessFactor 0.2; //valor de decaimento fixo (subtraído) ao apertar o botão
+
+double r = 0;
+double g = 0;
+double b = 0;
+double h = 0;
+double s = 1;
+double v = 0.6;
